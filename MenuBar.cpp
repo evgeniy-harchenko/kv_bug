@@ -1,6 +1,11 @@
 #include <QMainWindow>
 #include "MenuBar.h"
 
+const QString kMenuBarStyle = "QMenuBar::item {"
+                              "background-color: black;"
+                              "}";
+
+
 MenuBar::MenuBar(QWidget *parent) : QMenuBar(parent) {
     QMenu *menu1 = addMenu(tr("menu1"));
     menu1->addAction("submenu1");
@@ -13,6 +18,8 @@ MenuBar::MenuBar(QWidget *parent) : QMenuBar(parent) {
     QMenu *menu3 = addMenu(tr("menu3"));
     menu3->addAction("submenu1");
     menu3->addAction("submenu2");
+
+    setStyleSheet(kMenuBarStyle);
 }
 
 void MenuBar::registerActions(QWidget *parent) const {
@@ -28,4 +35,8 @@ MenuBar *MenuBar::instance(QWidget *widget) {
         window->setMenuBar(new MenuBar(window));
 
     return static_cast<MenuBar *>(window->menuBar());
+}
+
+void MenuBar::updateStyleSheet(bool isCustom) {
+    setStyleSheet(isCustom ? kMenuBarStyle : "");
 }

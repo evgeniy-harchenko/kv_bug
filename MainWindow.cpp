@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget *parent,
         : QMainWindow(parent, flags) {
     setAttribute(Qt::WA_DeleteOnClose);
 
+    mMenuBar = new MenuBar(this);
     mMenuBar = MenuBar::instance(this);
     mMenuBar->registerActions(this);
 

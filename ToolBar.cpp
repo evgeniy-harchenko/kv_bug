@@ -1,5 +1,5 @@
-#include "ToolBar.h"
 #include "MainWindow.h"
+#include "ToolBar.h"
 #include "SearchField.h"
 #include <QMenu>
 #include <QButtonGroup>
@@ -122,6 +122,7 @@ ToolBar::ToolBar(MainWindow *parent) : QToolBar(parent) {
                 isCustom = !isCustom;
                 parent->setToolBarStyleSheet(isCustom ? kStyleSheet : "");
                 parent->toolBar()->mSearchField->updateStyleSheet(isCustom);
+                parent->menuBar()->updateStyleSheet(isCustom);
             });
 
     SegmentedButton *historyButton = new SegmentedButton(this);
