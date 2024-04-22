@@ -50,10 +50,7 @@ public:
         mLayout->setSpacing(0);
     }
 
-    void addButton(QAbstractButton *button, const QString &text = QString(),
-                   bool checkable = false) {
-        button->setCheckable(checkable);
-
+    void addButton(QAbstractButton *button) {
         mLayout->addWidget(button);
         mButtons.addButton(button, mButtons.buttons().size());
     }
@@ -125,14 +122,11 @@ ToolBar::ToolBar(MainWindow *parent) : QToolBar(parent) {
                 parent->menuBar()->updateStyleSheet(isCustom);
             });
 
-    SegmentedButton *historyButton = new SegmentedButton(this);
-    addWidget(historyButton);
+    SegmentedButton *segmentedButton = new SegmentedButton(this);
+    addWidget(segmentedButton);
 
-    mSegmentedButton = new CheckButton(historyButton);
-    historyButton->addButton(mSegmentedButton);
-
-    QMenu *prevMenu = new QMenu(mSegmentedButton);
-    mSegmentedButton->setMenu(prevMenu);
+    mSegmentedButton = new CheckButton(segmentedButton);
+    segmentedButton->addButton(mSegmentedButton);
 
     mNotSegmentedButton = new CheckButton(this);
     addWidget(mNotSegmentedButton);
