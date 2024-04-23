@@ -1,7 +1,5 @@
 #include "MainWindow.h"
 #include "ToolBar.h"
-#include "SearchField.h"
-#include <QMenu>
 #include <QButtonGroup>
 #include <QHBoxLayout>
 #include <QPainter>
@@ -11,61 +9,24 @@
 #include <QWindow>
 #include <QtMath>
 
-const int kButtonWidth = 36;
-const int kButtonHeight = 24;
-
-const QString kStyleSheet = "QToolButton {"
-                            "  border-radius: 4px;"
-                            "  padding: 0px 4px 0px 4px"
-                            "}"
-                            "QToolButton#first {"
-                            "  border-top-right-radius: 0px;"
-                            "  border-bottom-right-radius: 0px"
-                            "}"
-                            "QToolButton#middle {"
-                            "  border-left: none;"
-                            "  border-radius: 0px"
-                            "}"
-                            "QToolButton#last {"
-                            "  border-left: none;"
-                            "  border-top-left-radius: 0px;"
-                            "  border-bottom-left-radius: 0px"
-                            "}"
-                            "QToolButton::menu-indicator {"
-                            "  image: none"
-                            "}"
-                            "QToolButton::menu-button {"
-                            "  border: none;"
-                            "  width: 10px"
-                            "}"
-                            "QToolButton::menu-arrow {"
-                            "  image: none"
-                            "}";
-
 class SegmentedButton : public QWidget {
 public:
     SegmentedButton(QWidget *parent = nullptr) : QWidget(parent) {
         mLayout = new QHBoxLayout(this);
-        mLayout->setContentsMargins(0, 0, 0, 0);
-        mLayout->setSpacing(0);
     }
 
     void addButton(QAbstractButton *button) {
         mLayout->addWidget(button);
-        mButtons.addButton(button, mButtons.buttons().size());
     }
 
 private:
     QHBoxLayout *mLayout;
-    QButtonGroup mButtons;
 };
 
 class CheckButton : public QToolButton {
 public:
     CheckButton(QWidget *parent = nullptr) : QToolButton(parent) {}
-
-    QSize sizeHint() const override { return QSize(kButtonWidth, kButtonHeight); }
-
+    
     void paintEvent(QPaintEvent *event) override {
         QToolButton::paintEvent(event);
 
@@ -97,30 +58,8 @@ public:
     }
 };
 
-bool isCustom = true;
-
 ToolBar::ToolBar(MainWindow *parent) : QToolBar(parent) {
     setMovable(false);
-    setStyleSheet(kStyleSheet);
-
-    QToolButton *flipButton = new QToolButton(this);
-    flipButton->setStyleSheet("QToolButton {color: red;}");
-    flipButton->setText("Flip Style");
-    addWidget(flipButton);
-
-    QToolButton *testNormalButton = new QToolButton(this);
-    testNormalButton->setIcon(QIcon::fromTheme("window-symbolic"));
-    testNormalButton->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-    testNormalButton->setText("Test Normal Button");
-    addWidget(testNormalButton);
-
-    connect(flipButton, &QAbstractButton::clicked,
-            [parent] {
-                isCustom = !isCustom;
-                parent->setToolBarStyleSheet(isCustom ? kStyleSheet : "");
-                parent->toolBar()->mSearchField->updateStyleSheet(isCustom);
-                parent->menuBar()->updateStyleSheet(isCustom);
-            });
 
     SegmentedButton *segmentedButton = new SegmentedButton(this);
     addWidget(segmentedButton);
@@ -130,7 +69,4 @@ ToolBar::ToolBar(MainWindow *parent) : QToolBar(parent) {
 
     mNotSegmentedButton = new CheckButton(this);
     addWidget(mNotSegmentedButton);
-
-    mSearchField = new SearchField(this);
-    addWidget(mSearchField);
 }

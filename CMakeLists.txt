@@ -13,14 +13,10 @@ find_package(Qt6 COMPONENTS
         REQUIRED)
 
 add_executable(test main.cpp
-        MenuBar.cpp
-        MenuBar.h
         ToolBar.cpp
         ToolBar.h
         MainWindow.cpp
         MainWindow.h
-        SearchField.cpp
-        SearchField.h
 )
 target_link_libraries(test
         Qt::Core

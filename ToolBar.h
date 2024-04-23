@@ -4,7 +4,6 @@
 #include <QToolBar>
 
 class MainWindow;
-class SearchField;
 class QToolButton;
 
 class ToolBar : public QToolBar {
@@ -16,8 +15,6 @@ private:
     QToolButton *mSegmentedButton;
 
     QToolButton *mNotSegmentedButton;
-
-    SearchField *mSearchField;
 
     friend class MainWindow;
 };
