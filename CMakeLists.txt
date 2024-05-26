@@ -7,11 +7,7 @@ project(simpletreemodel LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(ECM ${KF6_MIN_VERSION} REQUIRED NO_MODULE)
-set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
-
-find_package(Qt6 REQUIRED COMPONENTS Core Gui Test Widgets)
-find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS XmlGui)
+find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets)
 
 qt_standard_project_setup()
 
@@ -27,7 +23,6 @@ target_link_libraries(simpletreemodel PRIVATE
         Qt6::Core
         Qt6::Gui
         Qt6::Widgets
-        KF6::XmlGui
 )
 
 # Resources:
