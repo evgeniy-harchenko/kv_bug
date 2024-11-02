@@ -8,6 +8,6 @@ MainWindow::MainWindow(QWidget *parent,
     setAttribute(Qt::WA_DeleteOnClose);
 
     //button->setIcon(QIcon(QStringLiteral(":/icon.svg")));
-    button->setIcon(QIcon::fromTheme(QStringLiteral("dialog-warning")));
+    button->setIcon(QIcon::fromTheme(QStringLiteral("dialog-error")));
     button->setCheckable(true);
 }
