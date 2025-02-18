@@ -9,6 +9,6 @@ public:
     MainWindow(QWidget *parent = nullptr,
                Qt::WindowFlags flags = Qt::WindowFlags());
 
-    class QToolButton *const button;
+    class QPushButton *const button;
 };
 #endif //TEST_MAINWINDOW_H

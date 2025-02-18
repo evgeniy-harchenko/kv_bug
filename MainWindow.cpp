@@ -1,10 +1,10 @@
 #include "MainWindow.h"
-#include <QToolButton>
+#include <QPushButton>
 
 MainWindow::MainWindow(QWidget *parent,
                        Qt::WindowFlags flags)
         : QMainWindow(parent, flags),
-          button(new QToolButton(this)){
+          button(new QPushButton(this)){
     setAttribute(Qt::WA_DeleteOnClose);
 
     //button->setIcon(QIcon(QStringLiteral(":/icon.svg")));
